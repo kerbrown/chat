@@ -20,11 +20,9 @@ if (Meteor.isClient) {
       return "I updated my nickname to " + nickname;
 
     } else if(message.match(joinPattern)) {
-      var roomName = message.replace(joinPattern,"");
-      var roomExists = Rooms.find({name: roomName});
-      console.log("test ", roomExists);
+      //TODO
 
-      return "Switching rooms to " + roomName;
+      return message;
 
     } else {
 
@@ -47,7 +45,6 @@ if (Meteor.isClient) {
     'submit .new-message': function (event) {
       var message = event.target.text.value;
       var roomId = Session.get("currentRoomId");
-      //console.log("test command", commandFilter("foo"));
 
       Meteor.call("newMessage", commandFilter(message), roomId);
 
