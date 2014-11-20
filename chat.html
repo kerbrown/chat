@@ -1,0 +1,67 @@
+<head>
+  <title>Chat</title>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+       <div class="navbar-inner">
+         <div class="container">
+           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+           </button>
+           <a class="brand" href="#">Simple Chat App</a>
+           </div>
+           <div class="container">
+            <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Rooms
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            {{#each rooms}}
+              {{> room}}
+            {{/each}}
+            </ul>
+          </div>
+          </div>
+        </div>
+
+</nav>
+
+<div class="container">
+{{> loginButtons}}
+
+{{#if currentUser}}
+
+<ul>
+    {{#each messages}}
+        {{> message}}
+    {{/each}}
+</ul>
+
+  <form class="new-message">
+        <span>Enter Message: <input type="text" name="text" placeholder="" /></span>
+  </form>
+  {{>userInfo}}
+{{/if}}
+</div>
+</body>
+
+<template name="message">
+    <li>{{username}} - {{text}}</li>
+</template>
+
+<template name="room">
+    <li role="presentation"><a role="menuitem" tabindex="-1" class="room-selector" href="#" data="{{id}}">{{name}}</a></li>
+</template>
+
+<template name="userInfo">
+{{#if editNickname}}
+    <span>
+    <form class="nickname-form">
+      <input type="text" name="nicknameVal" value="{{currentUser.profile.nickname}}"/>
+    </form>
+    <a href="#" class="nickname-cancel">Cancel</a></span>
+{{else}}
+    <a class="nickname" href="#">Current Nickname: {{currentUser.profile.nickname}}</a>
+{{/if}}
+</template>
